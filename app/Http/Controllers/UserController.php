@@ -17,7 +17,7 @@ class UserController extends Controller
         $registros=User::where('name','like', "%{$texto}%")
                     ->orWhere('email','like',"{$texto}")
                     ->orderBy('id', 'desc')
-                    ->paginate(10); 
+                    ->paginate(1); 
                     return view('usuario.index', compact('registros', 'texto'));                  
     }
 
@@ -32,9 +32,15 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $registro=new User();
+        $registro->name=$request->input('name');
+        $registro->email=$request->input('email');
+        $registro->password=bcrypt($request->input('password'));
+        $registro->activo=$request->input('activo');
+        $registro->save();
+        return redirect()->route('usuarios.index')->with('mensaje','Registro '.$registro->name.' creado satisfactoriamente');
     }
 
     /**
