@@ -26,6 +26,12 @@
                                     </div>
                                 </form>
                             </div>
+                            @if(Session::has('mensaje'))
+                            <div class="alert alert-info alert-dismissible fade show mt-2">
+                                {{ Session::get('mensaje') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close" ></button>
+                            </div> 
+                            @endif                         
                             <div class="table-responsive mt-3">
                                 <table class="table table-bordered">
                                     <thead>

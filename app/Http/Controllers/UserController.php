@@ -17,7 +17,7 @@ class UserController extends Controller
         $registros=User::where('name','like', "%{$texto}%")
                     ->orWhere('email','like',"{$texto}")
                     ->orderBy('id', 'desc')
-                    ->paginate(1); 
+                    ->paginate(10); 
                     return view('usuario.index', compact('registros', 'texto'));                  
     }
 
